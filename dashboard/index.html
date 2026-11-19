@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — pre-token protocols, ranked</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="logo">RADAR</div>
+    <div>
+      <h1>Token Radar</h1>
+      <p class="sub">Discovery-first board of protocols that record no token yet — ranked by what a token would be worth if the record stayed as it is.</p>
+    </div>
+  </div>
+  <div class="meta" id="meta">Snapshot 14 Nov 2026 · 200 rows · watchlist 40/40</div>
+</header>
+
+<section class="explain">
+  <h2>How the radar ranks</h2>
+  <p>Implied value = <code>min(ln(TVL / $5M + 1), 4) × (1 + 7-day growth, clamped −50%…+200%) × 1 / (1 + age in years)</code> × $25M.
+  Size matters, but only on a log scale capped at about $268M of TVL — beyond that, more size adds nothing, so a fast-growing young protocol surfaces above a big slow one.
+  Growth is the snapshot's own <code>change_7d</code>; age is days since DefiLlama first listed the protocol.
+  Every row records no token on DefiLlama; protocols whose token already trades are not on this board.</p>
+  <p class="note">“Records no token” is what the snapshot says — it is not proof a protocol has none.</p>
+</section>
+
+<section class="controls" id="controls">
+  <input id="q" type="search" placeholder="Search name or slug…" aria-label="Search">
+  <select id="cat" aria-label="Category"><option value="">All categories</option></select>
+  <select id="chain" aria-label="Chain"><option value="">All chains</option></select>
+  <select id="sort" aria-label="Sort">
+    <option value="rank">Sort: implied value</option>
+    <option value="tvl">Sort: TVL</option>
+    <option value="growth">Sort: 7-day growth</option>
+    <option value="age">Sort: youngest first</option>
+  </select>
+  <label class="chk"><input id="earlyOnly" type="checkbox"> Early signals only</label>
+  <span class="count" id="count"></span>
+</section>
+
+<main id="view"></main>
+
+<footer class="foot">
+  <p>Data: DefiLlama snapshot, 14 Nov 2026. Implied values are this radar's own model, not a prediction that a token launches or what it will trade at. Farm plans are suggestions, not financial advice.</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="model.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
